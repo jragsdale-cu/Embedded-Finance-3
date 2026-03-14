@@ -23,10 +23,18 @@
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
+  align-items: center;
   background: #111;
   padding: 20px 24px;
   overflow-y: auto;
+}
+#page-login .login-inner {
+  margin: auto;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #page-login .red-bar {
   position: fixed; top: 0; left: 0; right: 0; height: 4px;
@@ -48,7 +56,7 @@
 }
 .login-card {
   background: #fff; border-radius: 20px; padding: 30px 26px;
-  width: 100%; max-width: 360px;
+  width: 100%;
   box-shadow: 0 25px 60px rgba(0,0,0,.5);
 }
 .login-card h2 { font-size: 20px; font-weight: 700; margin-bottom: 3px; }
@@ -221,33 +229,37 @@ body.logged-in #page-app { display: block; }
 
 <div id="page-login">
   <div class="red-bar"></div>
-
-  <div class="login-brand">
-    <div class="badge">
-      <div class="badge-icon">CU</div>
-      <div class="badge-text">It's<span>My</span>CU</div>
+  <div class="login-inner">
+    <div class="login-brand">
+      <div class="badge">
+        <div class="badge-icon">CU</div>
+        <div class="badge-text">It's<span>My</span>CU</div>
+      </div>
+      <div class="tagline">Partner Lending Portal</div>
     </div>
-    <div class="tagline">Partner Lending Portal</div>
+
+```
+<div class="login-card">
+  <h2>Welcome back</h2>
+  <div class="lc-sub">Sign in with your partner credentials</div>
+  <div class="field">
+    <label>Partner ID</label>
+    <input type="text" id="login-id" placeholder="e.g. summit" autocomplete="off" autocapitalize="none"/>
   </div>
+  <div class="field">
+    <label>PIN</label>
+    <input type="password" id="login-pin" placeholder="4-digit PIN" inputmode="numeric"/>
+  </div>
+  <div class="lc-error" id="login-error"></div>
+  <button class="btn btn-red" id="login-btn">Sign In</button>
+  <div class="lc-demo">
+    <strong>Demo accounts:</strong><br/>
+    summit, precision, heartland, or central<br/>
+    PIN: 1234 for all
+  </div>
+</div>
+```
 
-  <div class="login-card">
-    <h2>Welcome back</h2>
-    <div class="lc-sub">Sign in with your partner credentials</div>
-    <div class="field">
-      <label>Partner ID</label>
-      <input type="text" id="login-id" placeholder="e.g. summit" autocomplete="off" autocapitalize="none"/>
-    </div>
-    <div class="field">
-      <label>PIN</label>
-      <input type="password" id="login-pin" placeholder="4-digit PIN" inputmode="numeric"/>
-    </div>
-    <div class="lc-error" id="login-error"></div>
-    <button class="btn btn-red" id="login-btn">Sign In</button>
-    <div class="lc-demo">
-      <strong>Demo accounts:</strong><br/>
-      summit, precision, heartland, or central<br/>
-      PIN: 1234 for all
-    </div>
   </div>
 </div>
 

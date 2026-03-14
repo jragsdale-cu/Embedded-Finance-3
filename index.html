@@ -22,6 +22,12 @@
       box-shadow: 0 0 40px rgba(0,0,0,.06);
       position: relative;
     }
+    /* Login breaks out of the 430px shell */
+    #screen-login {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 100;
+    }
     /* Hide all screens by default */
     .screen { display: none; }
     .screen.active { display: block; }
@@ -30,11 +36,11 @@
 /* ── Login ─────────────────────────── */
 .login-screen {
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   background: #111;
-  padding: 24px;
-  padding-top: env(safe-area-inset-top, 48px);
+  padding: 40px 24px 24px;
 }
 .login-screen .top-bar {
   position: fixed; top: 0; left: 0; right: 0; height: 4px;
@@ -181,7 +187,18 @@
   background: #fff; border-radius: 14px; border: 1px solid #F3F4F6;
   overflow: hidden; margin-bottom: 16px;
 }
-.jotform-wrap iframe { width: 100%; min-height: 539px; border: none; display: block; }
+.jotform-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: 70vh;
+}
+.jotform-wrap iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 2000px;
+  border: none;
+  display: block;
+}
 
 /* ── Bottom Nav ────────────────────── */
 .bottom-nav {
@@ -347,17 +364,18 @@
         <div class="text">LIVE</div>
       </div>
     </div>
-    <iframe
-      id="JotFormIFrame-202395922989168"
-      title="ISCU Loan Application"
-      onload="window.parent.scrollTo(0,0)"
-      allowtransparency="true"
-      allow="geolocation; microphone; camera; fullscreen"
-      src="https://form.jotform.com/202395922989168"
-      frameborder="0"
-      style="min-width:100%;max-width:100%;height:539px;border:none;"
-      scrolling="yes"
-    ></iframe>
+    <div class="jotform-scroll">
+      <iframe
+        id="JotFormIFrame-202395922989168"
+        title="ISCU Loan Application"
+        allowtransparency="true"
+        allow="geolocation; microphone; camera; fullscreen"
+        src="https://form.jotform.com/202395922989168"
+        frameborder="0"
+        scrolling="yes"
+      ></iframe>
+    </div>
+  </div>
     <script>
       // JotForm auto-resize handler
       if (window.addEventListener) {
@@ -365,7 +383,7 @@
           if (typeof e.data === "string") {
             var d;
             try { d = JSON.parse(e.data); } catch(err) { return; }
-            if (d.action === "setHeight" && d.formID === "202395922989168") {
+            if (d.action === "setHeight") {
               var iframe = document.getElementById("JotFormIFrame-202395922989168");
               if (iframe) iframe.style.height = d.height + "px";
             }
